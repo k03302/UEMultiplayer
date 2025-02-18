@@ -33,12 +33,15 @@ void AMovingPlatform::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
 
-    Alpha = FMath::Clamp(Alpha + DeltaTime * Speed, 0.0f, 1.0f);
-    if (Alpha == 1 || Alpha == 0)
+    if (HasAuthority())
     {
-        Speed = -Speed;
-    }
+        Alpha = FMath::Clamp(Alpha + DeltaTime * Speed, 0.0f, 1.0f);
+        if (Alpha == 1 || Alpha == 0)
+        {
+            Speed = -Speed;
+        }
 
-    FVector NewPlatformLocation = Position1->GetComponentLocation() * Alpha + Position2->GetComponentLocation() * (1 - Alpha);
-    PlatformHolder->SetWorldLocation(NewPlatformLocation);
+        FVector NewPlatformLocation = Position1->GetComponentLocation() * Alpha + Position2->GetComponentLocation() * (1 - Alpha);
+        PlatformHolder->SetWorldLocation(NewPlatformLocation);
+    }
 }
