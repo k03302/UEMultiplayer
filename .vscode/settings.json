@@ -1,0 +1,9 @@
+{
+	"files.exclude": {
+		"D:/workspace/UnrealEngine/Multiplayer/.vs": true,
+		"D:/workspace/UnrealEngine/Multiplayer/.vscode": true,
+		"D:/workspace/UnrealEngine/Multiplayer/Content": true,
+		"D:/workspace/UnrealEngine/Multiplayer/Intermediate": true,
+		"D:/workspace/UnrealEngine/Multiplayer/Saved": true
+	}
+}
