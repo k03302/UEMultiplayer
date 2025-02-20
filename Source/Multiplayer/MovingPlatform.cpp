@@ -18,12 +18,18 @@ AMovingPlatform::AMovingPlatform()
     Position1->SetupAttachment(Root);
     Position2->SetupAttachment(Root);
     PlatformHolder->SetupAttachment(Root);
+
+    PlatformHolder->SetNetAddressable();
+    PlatformHolder->SetIsReplicated(true);
 }
 
 // Called when the game starts or when spawned
 void AMovingPlatform::BeginPlay()
 {
     Super::BeginPlay();
+
+    SetReplicates(true);
+    SetReplicateMovement(true);
 
     Alpha = InitAlpha;
 }
