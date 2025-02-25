@@ -11,6 +11,15 @@ AMovingPlatform2::AMovingPlatform2()
     DistanceMoved = 0;
 }
 
+void AMovingPlatform2::AddActiveTrigger()
+{
+    ActiveTriggers++;
+}
+void AMovingPlatform2::RemoveActiveTrigger()
+{
+    ActiveTriggers = FMath::Max(ActiveTriggers - 1, 0);
+}
+
 // Called when the game starts or when spawned
 void AMovingPlatform2::BeginPlay()
 {
@@ -32,7 +41,7 @@ void AMovingPlatform2::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
 
-    if (HasAuthority())
+    if (HasAuthority() && ActiveTriggers > 0)
     {
         FVector Location = GetActorLocation();
 
