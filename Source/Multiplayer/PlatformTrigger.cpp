@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "PlatformTrigger.h"
+#include "MovingPlatform2.h"
 #include "Components/BoxComponent.h"
 
 // Sets default values
@@ -40,7 +41,10 @@ void APlatformTrigger::OnComponentBeginOverlap(
     bool bFromSweep,
     const FHitResult &SweepResult)
 {
-    UE_LOG(LogTemp, Warning, TEXT("Activated: %s"), *OtherComp->GetName());
+    for (const auto &Platform : PlatformsToTrigger)
+    {
+        Platform->AddActiveTrigger();
+    }
 }
 
 void APlatformTrigger::OnComponentEndOverlap(
@@ -49,5 +53,8 @@ void APlatformTrigger::OnComponentEndOverlap(
     UPrimitiveComponent *OtherComp,
     int32 OtherBodyIndex)
 {
-    UE_LOG(LogTemp, Warning, TEXT("Dectivated: %s"), *OtherComp->GetName());
+    for (const auto &Platform : PlatformsToTrigger)
+    {
+        Platform->RemoveActiveTrigger();
+    }
 }
